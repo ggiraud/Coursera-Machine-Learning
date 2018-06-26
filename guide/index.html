@@ -1,0 +1,2310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2018-10-27 Sat 20:32 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Machine Learning</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Guillaume Giraud" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+
+<script type="text/javascript" src="js/org-info-src.js">
+/**
+ *
+ * @source: js/org-info-src.js
+ *
+ * @licstart  The following is the entire license notice for the
+ *  JavaScript code in js/org-info-src.js.
+ *
+ * Copyright (C) 2012-2018 Free Software Foundation, Inc.
+ *
+ *
+ * The JavaScript code in this tag is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU
+ * General Public License (GNU GPL) as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option)
+ * any later version.  The code is distributed WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+ *
+ * As additional permission under GNU GPL version 3 section 7, you
+ * may distribute non-source (e.g., minimized or compacted) forms of
+ * that code without the copy of the GNU GPL normally required by
+ * section 4, provided you include this license notice and a URL
+ * through which recipients can access the Corresponding Source.
+ *
+ * @licend  The above is the entire license notice
+ * for the JavaScript code in js/org-info-src.js.
+ *
+ */
+</script>
+
+<script type="text/javascript">
+
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+
+<!--/*--><![CDATA[/*><!--*/
+org_html_manager.set("TOC_DEPTH", "3");
+org_html_manager.set("LINK_HOME", "");
+org_html_manager.set("LINK_UP", "");
+org_html_manager.set("LOCAL_TOC", "1");
+org_html_manager.set("VIEW_BUTTONS", "0");
+org_html_manager.set("MOUSE_HINT", "underline");
+org_html_manager.set("FIXED_TOC", "0");
+org_html_manager.set("TOC", "1");
+org_html_manager.set("VIEW", "info");
+org_html_manager.setup();  // activate after the parameters are set
+/*]]>*///-->
+</script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Machine Learning</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgac7e44b">1. Linear Regression</a>
+<ul>
+<li><a href="#org9ef5a0e">1.1. Hypothesis</a></li>
+<li><a href="#org2b3f41f">1.2. Cost Function</a></li>
+<li><a href="#org311d5f7">1.3. Gradient Descent</a>
+<ul>
+<li><a href="#orgeb97201">1.3.1. Learning Rate</a></li>
+</ul>
+</li>
+<li><a href="#org34533c3">1.4. Feature Scaling</a>
+<ul>
+<li><a href="#org9ebb4c6">1.4.1. Mean Normalization</a></li>
+</ul>
+</li>
+<li><a href="#org51bd8da">1.5. Polynomial Regression</a></li>
+<li><a href="#org271f903">1.6. Normal Equations</a></li>
+</ul>
+</li>
+<li><a href="#org9d7a3b2">2. Logistic Regression</a>
+<ul>
+<li><a href="#org450c4d8">2.1. Hypothesis</a></li>
+<li><a href="#org3d325c8">2.2. Decision Boundary</a></li>
+<li><a href="#org6370feb">2.3. Cost Function</a></li>
+<li><a href="#org590ad72">2.4. Gradient Descent</a></li>
+<li><a href="#orge24ae9a">2.5. Multiclass Classification</a></li>
+</ul>
+</li>
+<li><a href="#orgf2e0522">3. Overfitting</a>
+<ul>
+<li><a href="#org27a372f">3.1. Adressing Overfitting</a></li>
+</ul>
+</li>
+<li><a href="#org9a735d3">4. Regularization</a>
+<ul>
+<li><a href="#org5bc2094">4.1. Regularized Linear Regression</a>
+<ul>
+<li><a href="#org505a35f">4.1.1. Cost Function</a></li>
+<li><a href="#orgc159af2">4.1.2. Gradient Descent</a></li>
+<li><a href="#org7c2d600">4.1.3. Normal Equation</a></li>
+</ul>
+</li>
+<li><a href="#orga9822a9">4.2. Regularized Logistic Regression</a>
+<ul>
+<li><a href="#org04e9785">4.2.1. Cost Function</a></li>
+<li><a href="#orgf2aeb71">4.2.2. Gradient Descent</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org0a6e7b7">5. Neural Networks</a>
+<ul>
+<li><a href="#org758c65e">5.1. Neuron Model: Logistic Unit</a></li>
+<li><a href="#orgf479404">5.2. Neural Network</a>
+<ul>
+<li><a href="#org320a5f2">5.2.1. Hypothesis</a></li>
+<li><a href="#orgeb41de2">5.2.2. Forward Propagation: Vectorized Implementation</a></li>
+<li><a href="#orgad470e5">5.2.3. Output Units: One-vs-all</a></li>
+<li><a href="#org705e07b">5.2.4. Cost Function</a></li>
+<li><a href="#orgcdea28c">5.2.5. Gradient Computation</a></li>
+<li><a href="#org3680c45">5.2.6. Backpropagation Algorithm</a></li>
+<li><a href="#org07b5a83">5.2.7. Unrolling Parameters</a></li>
+<li><a href="#org308da40">5.2.8. Gradient Checking</a></li>
+<li><a href="#orgc457ccd">5.2.9. Random Initialization</a></li>
+<li><a href="#org0a4da35">5.2.10. Training A Neural Network</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org8985aaf">6. Debugging a Learning Algorithm</a>
+<ul>
+<li><a href="#orgf13087d">6.1. Evaluating your Hypothesis</a></li>
+<li><a href="#org2462be0">6.2. Training/Testing procedure for Linear Regression</a></li>
+<li><a href="#orgaae37fb">6.3. Training/Testing procedure for Logistic Regression</a></li>
+<li><a href="#org70e16c8">6.4. Model Selection and Training/Validation/Test sets</a></li>
+<li><a href="#orgb9d8753">6.5. Diagnosing Bias vs Variance in Model Selection</a></li>
+<li><a href="#orgbf3be6b">6.6. Choosing the Regularization Parameter \(\lambda\)</a></li>
+<li><a href="#org647fa0f">6.7. Learning Curves</a></li>
+<li><a href="#orge5701a8">6.8. Deciding what to do next</a></li>
+<li><a href="#orgec32168">6.9. Neural Networks and Overfitting</a></li>
+<li><a href="#org8f75065">6.10. Recommended Approach</a></li>
+<li><a href="#orgc8c897b">6.11. Error Metrics for Skewed Classes</a></li>
+<li><a href="#org9ac7640">6.12. Precision/Recall</a></li>
+<li><a href="#org66596a3">6.13. F\(_{1}\) Score (F Score)</a></li>
+<li><a href="#org1b997f7">6.14. Threshold</a></li>
+</ul>
+</li>
+<li><a href="#org625f3d5">7. Support Vector Machines (SVM)</a>
+<ul>
+<li><a href="#org88381d9">7.1. C Regularization</a></li>
+<li><a href="#org85349be">7.2. Gaussian Kernel (Radial Basis Function Kernel)</a></li>
+<li><a href="#orgd65bf71">7.3. Linear Kernel</a></li>
+</ul>
+</li>
+<li><a href="#org7d16181">8. K-means</a>
+<ul>
+<li><a href="#orgee9bfba">8.1. Distortion Cost Function</a></li>
+<li><a href="#org563afe6">8.2. Algorithm</a></li>
+<li><a href="#org3cbab8c">8.3. Random Initialization</a></li>
+<li><a href="#orgc1fd372">8.4. Local Optima</a></li>
+<li><a href="#org7ea54f4">8.5. Choosing Number of Clusters (\(K\))</a></li>
+</ul>
+</li>
+<li><a href="#org0b6ef12">9. Principal Components Analysis (PCA)</a>
+<ul>
+<li><a href="#org99adc2d">9.1. Algorithm</a></li>
+<li><a href="#orgd3d8651">9.2. Choosing the number of Principal Components</a></li>
+<li><a href="#orga9fb7a6">9.3. Reconstruction from compressed representation</a></li>
+<li><a href="#orgf02cbde">9.4. Applications</a></li>
+</ul>
+</li>
+<li><a href="#org94c3ec4">10. Anomaly Detection</a>
+<ul>
+<li><a href="#orgd1c1fe2">10.1. How to use anomaly detection?</a></li>
+<li><a href="#org9e146fe">10.2. The Gaussian distribution (Normal Distribution)</a></li>
+<li><a href="#org357c12f">10.3. Anomaly detection algorithm</a></li>
+<li><a href="#orgc44bb59">10.4. Algorithm evaluation</a></li>
+<li><a href="#org50d017e">10.5. Anomaly detection vs. Supervised learning</a>
+<ul>
+<li><a href="#org410183f">10.5.1. Anomaly detection</a></li>
+<li><a href="#org181a789">10.5.2. Supervised learning</a></li>
+</ul>
+</li>
+<li><a href="#org895e758">10.6. Choosing Features to use</a></li>
+<li><a href="#org9cb92fa">10.7. Multivariate gaussian distribution model</a></li>
+<li><a href="#org2efd883">10.8. Original model vs. Multivariate model</a>
+<ul>
+<li><a href="#org247ccd2">10.8.1. Original model</a></li>
+<li><a href="#orgfc5ffbe">10.8.2. Multivariate Gaussian</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgd3fd86f">11. Explanations</a>
+<ul>
+<li><a href="#orgbce3854">11.1. Chain Rule</a></li>
+<li><a href="#org71533ef">11.2. Logarithmic Derivative</a></li>
+<li><a href="#org549e408">11.3. Exponential Derivative</a></li>
+<li><a href="#org36a5bbb">11.4. Sigmoid Derivative</a></li>
+<li><a href="#org32e4149">11.5. Logistic Hypothesis Derivative</a></li>
+<li><a href="#org475ad95">11.6. Logistic Cost Function Derivative</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgac7e44b" class="outline-2">
+<h2 id="orgac7e44b"><span class="section-number-2">1</span> Linear Regression</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org9ef5a0e" class="outline-3">
+<h3 id="org9ef5a0e"><span class="section-number-3">1.1</span> Hypothesis</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+\[ \begin{align*}
+   h_{\theta}(\mathbf{x}) & = \theta^{\top}\mathbf{x} = \theta_{0}\mathbf{x}_{0} + \theta_{1}\mathbf{x}_{1} + \theta_{2}\mathbf{x}_{2} + \cdots + \theta_{n}\mathbf{x}_{n} \\
+   x_{0} & = 1
+   \end{align*} \]
+</p>
+</div>
+</div>
+<div id="outline-container-org2b3f41f" class="outline-3">
+<h3 id="org2b3f41f"><span class="section-number-3">1.2</span> Cost Function</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+\[J(\theta) = \frac{1}{2m}\sum_{i=1}^{m}(h_\theta(\mathbf{x}^{(i)}) - y^{(i)})^2\]
+</p>
+</div>
+</div>
+<div id="outline-container-org311d5f7" class="outline-3">
+<h3 id="org311d5f7"><span class="section-number-3">1.3</span> Gradient Descent</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+Repeat until convergence:
+</p>
+
+<p>
+\[ \begin{align*}
+   & \theta_{j} := \theta_{j} - \alpha\frac{\partial}{\partial \theta_{j}} J(\theta_{0},\theta_{1},\dots,\theta{n}), j \in \{0,1,\dots,n\} \\
+   & \alpha \text{ is the } \textbf{learning rate}
+   \end{align*} \]
+</p>
+
+<p>
+or:
+</p>
+
+<p>
+\[\theta_{j} := \theta_{j} - \alpha\frac{1}{m}\sum_{i=1}^{m}(h_{\theta}(\mathbf{x}^{(i)}) -y^{(i)})\mathbf{x}_{j}^{(i)}\]
+</p>
+</div>
+
+<div id="outline-container-orgeb97201" class="outline-4">
+<h4 id="orgeb97201"><span class="section-number-4">1.3.1</span> Learning Rate</h4>
+<div class="outline-text-4" id="text-1-3-1">
+<p>
+Plot the cost \(J(\theta)\) in regard to the number of iterations.
+</p>
+<ul class="org-ul">
+<li>if \(\alpha\) is too small: slow convergence.</li>
+<li>if \(\alpha\) is too large: \(J(\theta)\) may not decrease on every iteration; may not converge.</li>
+</ul>
+
+<p>
+To choose \(\alpha\), try: \(0.001, 0.003, 0.01, 0.03, 0.1, 0.3, 1, \dots\)
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org34533c3" class="outline-3">
+<h3 id="org34533c3"><span class="section-number-3">1.4</span> Feature Scaling</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+Get every feature into approximately a \(-1 \leqslant x_{i} \leqslant +1\) range.
+</p>
+</div>
+<div id="outline-container-org9ebb4c6" class="outline-4">
+<h4 id="org9ebb4c6"><span class="section-number-4">1.4.1</span> Mean Normalization</h4>
+<div class="outline-text-4" id="text-1-4-1">
+<p>
+Make features have approximately zero mean and a \(-0.5 \leqslant x_{i} \leqslant +0.5\) range.
+</p>
+
+<p>
+\[x_{i} \leftarrow \frac{x_{i} - \mu_{i}}{s_{i}}\]
+</p>
+
+<p>
+where \(\mu_{i}\) is the average value of \(x_{i}\) in the training set,
+</p>
+
+<p>
+and \(s_{i}\) is the range (max - min) of the values of \(x_{i}\) or his <b>standard deviation</b> when using the <b>standard score(z-score)</b>.
+</p>
+
+<p>
+We <b>never</b> normalize \(x_0\)!
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org51bd8da" class="outline-3">
+<h3 id="org51bd8da"><span class="section-number-3">1.5</span> Polynomial Regression</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+\[h_{\theta}(x) = \theta_{0} + \theta_{1}x + \theta_{2}x^{2} + \theta_{3}x^3\]
+</p>
+
+<p>
+<b>Always</b> use feature scaling after adding polynomial features, but not on \(x_{0}\)!
+</p>
+</div>
+</div>
+<div id="outline-container-org271f903" class="outline-3">
+<h3 id="org271f903"><span class="section-number-3">1.6</span> Normal Equations</h3>
+<div class="outline-text-3" id="text-1-6">
+<p>
+\[\theta = (\mathbf{X}^{\top}\mathbf{X})^{-1}\mathbf{X}^{\top}\mathbf{y}, \mathbf{X} \in \mathbb{R}^{m \times n+1}\]
+</p>
+
+<p>
+\(m\) is the number of training examples, \(n\) is the number of features.
+</p>
+
+<p>
+\[\begin{align*}
+   \mathbf{X} & = \begin{bmatrix}
+   1 & \mathbf{x}_{1}^{(1)} & \mathbf{x}_{2}^{(1)} & \cdots & \mathbf{x}_{n}^{(1)} \\
+   1 & \mathbf{x}_{1}^{(2)} & \mathbf{x}_{2}^{(2)} & \cdots & \mathbf{x}_{n}^{(2)} \\
+   \vdots & \vdots & \vdots & \ddots & \vdots \\
+   1 & \mathbf{x}_{1}^{(m)} & \mathbf{x}_{2}^{(m)} & \cdots & \mathbf{x}_{n}^{(m)}
+   \end{bmatrix} \in \mathbb{R}^{m \times n+1} \\
+   \mathbf{y} & = \begin{bmatrix}
+   y^{(1)} \\
+   y^{(2)} \\
+   \vdots \\
+   y^{(m)}
+   \end{bmatrix} \in \mathbb{R}^{m} \\
+   \theta & = \begin{bmatrix}
+   \theta_{0} \\
+   \theta_{1} \\
+   \theta_{2} \\
+   \vdots \\
+   \theta_{n}
+   \end{bmatrix} \in \mathbb{R}^{n+1}
+   \end{align*}\]
+</p>
+
+<p>
+No need to use feature scaling.
+</p>
+
+<p>
+Use <b>gradient descent</b> over <b>normal equation</b> when we have more than 1000~10000 features.
+</p>
+
+<p>
+If \(\mathbf{X}^{\top}\mathbf{X}\) is non-invertible:
+</p>
+<ul class="org-ul">
+<li>remove redundant features (linearly dependent).</li>
+<li>delete features or use regularization if too many features (\(m\leqslant n\)).</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org9d7a3b2" class="outline-2">
+<h2 id="org9d7a3b2"><span class="section-number-2">2</span> Logistic Regression</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-org450c4d8" class="outline-3">
+<h3 id="org450c4d8"><span class="section-number-3">2.1</span> Hypothesis</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+Logistic Function (or Sigmoid Function):
+</p>
+
+<p>
+\[ \begin{align*}
+   h_{\theta}(\mathbf{x}) & = g(\theta^{\top}\mathbf{x}) \\
+   g(z) & = \frac{1}{1 + e^{-z}}
+   \end{align*} \]
+</p>
+
+<p>
+or:
+</p>
+
+<p>
+\[ \begin{align*}
+   & h_{\theta}(\mathbf{x}) = \frac{1}{1 + e^{-\theta^{\top}\mathbf{x}}} \\
+   & 0 \leq h_{\theta}(\mathbf{x}) \leq 1
+   \end{align*} \]
+</p>
+
+<p>
+\(h_{\theta}(\mathbf{x})\) = estimated probability that \(y = 1\) on input \(\mathbf{x}\).
+</p>
+
+<p>
+\(h_{\theta}(\mathbf{x}) = P(y = 1|\mathbf{x};\theta)\)
+</p>
+
+<p>
+"probability that \(y = 1\), given \(\mathbf{x}\), parametrized by \(\theta\)". 
+</p>
+</div>
+</div>
+<div id="outline-container-org3d325c8" class="outline-3">
+<h3 id="org3d325c8"><span class="section-number-3">2.2</span> Decision Boundary</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+Predict "\(y = 1\)" if \(h_{\theta}(\mathbf{x}) \ge 0.5\)
+</p>
+
+<p>
+\(g(\theta^{\top}\mathbf{x}) \ge 0.5\) when \(\theta^{\top}\mathbf{x} \ge 0\) 
+</p>
+
+<p>
+Predict "\(y = 0\)" if \(h_{\theta}(\mathbf{x}) \lt 0.5\)
+</p>
+
+<p>
+\(g(\theta^{\top}\mathbf{x}) \lt 0.5\) when \(\theta^{\top}\mathbf{x} \lt 0\) 
+</p>
+</div>
+</div>
+<div id="outline-container-org6370feb" class="outline-3">
+<h3 id="org6370feb"><span class="section-number-3">2.3</span> Cost Function</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+The mean-square cost function used for linear regression is a <b>non-convex</b> function when used with sigmoid hypothesis !
+</p>
+
+<p>
+Instead we will use the <b>Cross-entropy</b> loss (or log loss).
+</p>
+
+<p>
+\[ \begin{align*}
+   & Cost(h_{\theta}(\mathbf{x}), y) = \left. \begin{cases}
+   -log(h_{\theta}(\mathbf{x})) & \text{if } y = 1 \\
+   -log(1 - h_{\theta}(\mathbf{x})) & \text{if } y = 0 \\
+   \end{cases}
+   \right\} \\
+   & Cost(h_{\theta}(\mathbf{x}), y) = -(y) log(h_{\theta}(\mathbf{x})) -(1 - y) log(1 - h_{\theta}(\mathbf{x}))
+   \end{align*} \]
+</p>
+
+<p>
+so:
+</p>
+
+<p>
+\[J(\theta) = -\frac{1}{m}\bigg[\sum_{i=1}^{m}y^{(i)} log(h_{\theta}(\mathbf{x}^{(i)})) + (1 - y^{(i)}) log(1 - h_{\theta}(\mathbf{x}^{(i)}))\bigg]\]
+</p>
+</div>
+</div>
+<div id="outline-container-org590ad72" class="outline-3">
+<h3 id="org590ad72"><span class="section-number-3">2.4</span> Gradient Descent</h3>
+<div class="outline-text-3" id="text-2-4">
+<p>
+Repeat until convergence:
+</p>
+
+<p>
+\[ \begin{align*}
+   & \theta_{j} = \theta_{j} - \alpha\frac{\partial}{\partial \theta_{j}}J(\theta_{0}, \theta_{1},\dots,\theta_{n}), j \in \{0,1,\dots,n\} \\
+   & \alpha \text{ is the "}\textbf{learning rate}\text{"}
+   \end{align*} \]
+</p>
+
+<p>
+or:
+</p>
+
+<p>
+\[\theta_{j} = \theta_{j} - \alpha\frac{1}{m}\sum_{i=1}^{m}(h_{\theta}(\mathbf{x}^{(i)}) - y^{(i)})\mathbf{x}_{j}^{(i)}\]
+</p>
+
+<p>
+The algorithm looks identical to linear regression, but \(h_{\theta}(\mathbf{x})\) is different !
+</p>
+</div>
+</div>
+<div id="outline-container-orge24ae9a" class="outline-3">
+<h3 id="orge24ae9a"><span class="section-number-3">2.5</span> Multiclass Classification</h3>
+<div class="outline-text-3" id="text-2-5">
+<p>
+Train a logistic regression classifier \(h_{\theta}^{(i)}(\mathbf{x})\) for each class \(i\) to predict the probability that \(y = i\).
+</p>
+
+<p>
+On a new input \(\mathbf{x}\) , to make a prediction, pick the class \(i\) that maximizes:
+</p>
+
+<p>
+\[\max_{i}h_{\theta}^{(i)}(\mathbf{x})\]
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf2e0522" class="outline-2">
+<h2 id="orgf2e0522"><span class="section-number-2">3</span> Overfitting</h2>
+<div class="outline-text-2" id="text-3">
+<ul class="org-ul">
+<li>An "Underfit" model is said to have "High Bias".</li>
+<li>An "Overfit" model is said to have "High Variance".</li>
+</ul>
+</div>
+<div id="outline-container-org27a372f" class="outline-3">
+<h3 id="org27a372f"><span class="section-number-3">3.1</span> Adressing Overfitting</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+Options:
+</p>
+<ol class="org-ol">
+<li>Reduce number of features
+<ul class="org-ul">
+<li>Manually select which features to keep.</li>
+<li>Model selection algorithm.</li>
+</ul></li>
+<li>Regularization
+<ul class="org-ul">
+<li>Keep all the features, but reduce magnitude/values of parameters \(\theta_{j}\).</li>
+<li>Works well when we have  lot of features, each of which contributes a bit to predicting \(y\).</li>
+</ul></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-org9a735d3" class="outline-2">
+<h2 id="org9a735d3"><span class="section-number-2">4</span> Regularization</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Small values for \(\theta_{0},\theta_{1},\dots,\theta_{n}\).
+</p>
+<ul class="org-ul">
+<li>"Simpler" hypothesis</li>
+<li>Less prone to overfitting</li>
+</ul>
+
+
+<p>
+\[J(\theta) = \frac{1}{2m}\left[\sum_{i=1}^{m}(h_{\theta}(\mathbf{x}^{(i)}) - y^{(i)})^{2} + \lambda\sum_{j=1}^{n}\theta_{j}^{2}\right]\]
+</p>
+
+<p>
+\(\lambda\) is the <b>regularization parameter</b>.
+</p>
+
+<p>
+\(j\) starts at \(1\), we <b>do not</b> regularize \(\theta_{0}\)!
+</p>
+
+<p>
+If \(\lambda\) is very large:
+</p>
+
+<p>
+\(h_{\theta}(\mathbf{x}) = \theta_{0}\)
+</p>
+</div>
+<div id="outline-container-org5bc2094" class="outline-3">
+<h3 id="org5bc2094"><span class="section-number-3">4.1</span> Regularized Linear Regression</h3>
+<div class="outline-text-3" id="text-4-1">
+</div>
+<div id="outline-container-org505a35f" class="outline-4">
+<h4 id="org505a35f"><span class="section-number-4">4.1.1</span> Cost Function</h4>
+<div class="outline-text-4" id="text-4-1-1">
+<p>
+\[J(\theta) = \frac{1}{2m}\left[\sum_{i=1}^{m}(h_{\theta}(\mathbf{x}^{(i)}) - y^{(i)})^{2}\right] + \frac{\lambda}{2m}\sum_{j=1}^{n}\theta_{j}^{2}\]
+</p>
+</div>
+</div>
+<div id="outline-container-orgc159af2" class="outline-4">
+<h4 id="orgc159af2"><span class="section-number-4">4.1.2</span> Gradient Descent</h4>
+<div class="outline-text-4" id="text-4-1-2">
+<p>
+Repeat until convergence:
+</p>
+
+<p>
+\[ \begin{align*}
+    \theta_{0} & := \theta_{0} - \alpha\frac{1}{m}\sum_{i=1}^{m}(h_{\theta}(\mathbf{x}^{(i)}) - y^{(i)})\mathbf{x}_{0}^{(i)},\text{ we }\textbf{don't}\text{ penalize }\theta_{0}\text{!} \\
+    \theta_{j} & := \theta_{j} - \alpha\bigg[\frac{1}{m}\sum_{i=1}^{m}(h_{\theta}(\mathbf{x}^{(i)}) - y^{(i)})\mathbf{x}_{j}^{(i)} + \frac{\lambda}{m}\theta_{j}\bigg]
+    \end{align*} \]
+</p>
+
+<p>
+or:
+</p>
+
+<p>
+\[ \begin{align*}
+    & \theta_{j} := \theta_{j}\big(1 - \alpha\frac{\lambda}{m}\big) - \alpha\frac{1}{m}\sum_{i=1}^{m}(h_{\theta}(\mathbf{x}^{(i)}) - y^{(i)})\mathbf{x}_{j}^{(i)} \\
+    & 1 - \alpha\frac{\lambda}{m} \text{ is usually } \lt 1
+    \end{align*} \]
+</p>
+</div>
+</div>
+<div id="outline-container-org7c2d600" class="outline-4">
+<h4 id="org7c2d600"><span class="section-number-4">4.1.3</span> Normal Equation</h4>
+<div class="outline-text-4" id="text-4-1-3">
+<p>
+\[ \begin{align*}
+    \mathbf{X} & = \begin{bmatrix}
+    (\mathbf{x}^{(1)})^{\top} \\
+    \vdots \\
+    (\mathbf{x}^{(m)})^{\top}
+    \end{bmatrix} \in \mathbb{R}^{m \times (n+1)} \\
+    \mathbf{y} & = \begin{bmatrix}
+    y^{(1)} \\
+    \vdots \\
+    y^{(m)}
+    \end{bmatrix} \in \mathbb{R}^{m} \\
+    \mathbf{\theta} & = \Bigg(\mathbf{X}^{\top}\mathbf{X} + \lambda\begin{bmatrix}
+    0 & 0 & 0 & \cdots & 0 \\
+    0 & 1 & 0 & \cdots & 0 \\
+    0 & 0 & 1 & \cdots & 0 \\
+    \vdots & \vdots & \vdots & \ddots & \vdots \\
+    0 & 0 & 0 & \cdots & 1
+    \end{bmatrix}\Bigg)^{-1}\mathbf{X}^{\top}\mathbf{y} \in \mathbb{R}^{n+1}
+    \end{align*} \]
+</p>
+
+<p>
+If \(m \leq n\), \(\mathbf{X}^{\top}\mathbf{X}\) will be singular or "non invertible", using regularization will correct this! 
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orga9822a9" class="outline-3">
+<h3 id="orga9822a9"><span class="section-number-3">4.2</span> Regularized Logistic Regression</h3>
+<div class="outline-text-3" id="text-4-2">
+</div>
+<div id="outline-container-org04e9785" class="outline-4">
+<h4 id="org04e9785"><span class="section-number-4">4.2.1</span> Cost Function</h4>
+<div class="outline-text-4" id="text-4-2-1">
+<p>
+\[J(\theta) = -\frac{1}{m}\bigg[\sum_{i=1}^{m}y^{(i)} log(h_{\theta}(\mathbf{x}^{(i)})) + (1 - y^{(i)}) log(1 - h_{\theta}(\mathbf{x}^{(i)}))\bigg] + \frac{\lambda}{2m}\sum_{j=1}^{n}\theta_{j}^{2}\]
+</p>
+</div>
+</div>
+<div id="outline-container-orgf2aeb71" class="outline-4">
+<h4 id="orgf2aeb71"><span class="section-number-4">4.2.2</span> Gradient Descent</h4>
+<div class="outline-text-4" id="text-4-2-2">
+<p>
+\[ \begin{align*}
+    \theta_{0} & := \theta_{0} - \alpha\frac{1}{m}\sum_{i=1}^{m}(h_{\theta}(\mathbf{x}^{(i)}) - y^{(i)})\mathbf{x}_{0}^{(i)},\text{ we }\textbf{don't}\text{ penalize }\theta_{0}\text{!} \\
+    \theta_{j} & := \theta_{j} - \alpha\bigg[\frac{1}{m}\sum_{i=1}^{m}(h_{\theta}(\mathbf{x}^{(i)}) - y^{(i)})\mathbf{x}_{j}^{(i)} + \frac{\lambda}{m}\theta_{j}\bigg]
+    \end{align*} \]
+</p>
+
+<p>
+or:
+</p>
+
+<p>
+\[ \begin{align*}
+    & \theta_{j} := \theta_{j}\big(1 - \alpha\frac{\lambda}{m}\big) - \alpha\frac{1}{m}\sum_{i=1}^{m}(h_{\theta}(\mathbf{x}^{(i)}) - y^{(i)})\mathbf{x}_{j}^{(i)} \\
+    & 1 - \alpha\frac{\lambda}{m} \text{ is usually } \lt 1
+    \end{align*} \]
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org0a6e7b7" class="outline-2">
+<h2 id="org0a6e7b7"><span class="section-number-2">5</span> Neural Networks</h2>
+<div class="outline-text-2" id="text-5">
+</div>
+<div id="outline-container-org758c65e" class="outline-3">
+<h3 id="org758c65e"><span class="section-number-3">5.1</span> Neuron Model: Logistic Unit</h3>
+<div class="outline-text-3" id="text-5-1">
+
+<div class="figure">
+<p><img src="./obipy-resources/C2eMey.png" alt="C2eMey.png" />
+</p>
+</div>
+
+<p>
+Drawing the <b>bias unit</b> is facultative.
+</p>
+
+<p>
+\[h_{\theta}(\mathbf{x}) = \frac{1}{1 + e^{- \theta^{\top}\mathbf{x}}}\]
+</p>
+
+<p>
+<b>Sigmoid (logistic) activation function</b> is another term for the non-linearity \(g(z) = \frac{1}{1 + e^{-z}}\)
+</p>
+
+<p>
+\[x = \begin{bmatrix}
+   x_{0} \\
+   x_{1} \\
+   x_{2} \\
+   x_{3}
+   \end{bmatrix},
+   \theta = \begin{bmatrix}
+   \theta_{0} \\
+   \theta_{1} \\
+   \theta_{2} \\
+   \theta_{3}
+   \end{bmatrix}\]
+</p>
+
+<p>
+\(\theta\) if also often called <b>weights</b> instead of <b>parameters</b> of the model.
+</p>
+</div>
+</div>
+<div id="outline-container-orgf479404" class="outline-3">
+<h3 id="orgf479404"><span class="section-number-3">5.2</span> Neural Network</h3>
+<div class="outline-text-3" id="text-5-2">
+
+<div class="figure">
+<p><img src="./obipy-resources/V44PQ8.png" alt="V44PQ8.png" />
+</p>
+</div>
+
+<p>
+The first layer is called the <b>input layer</b>.
+</p>
+
+<p>
+The last layer is called the <b>output layer</b>.
+</p>
+
+<p>
+The layers between the first and the last are called the <b>hidden layers</b>.
+</p>
+</div>
+<div id="outline-container-org320a5f2" class="outline-4">
+<h4 id="org320a5f2"><span class="section-number-4">5.2.1</span> Hypothesis</h4>
+<div class="outline-text-4" id="text-5-2-1">
+<p>
+\[ \begin{align*}
+    a_1^{(2)} & = g(\Theta_{1,0}^{(1)}x_0 + \Theta_{1,1}^{(1)}x_1 + \Theta_{1,2}^{(1)}x_2 + \Theta_{1,3}^{(1)}x_3) \\
+    a_2^{(2)} & = g(\Theta_{2,0}^{(1)}x_0 + \Theta_{2,1}^{(1)}x_1 + \Theta_{2,2}^{(1)}x_2 + \Theta_{2,3}^{(1)}x_3) \\
+    a_3^{(2)} & = g(\Theta_{3,0}^{(1)}x_0 + \Theta_{3,1}^{(1)}x_1 + \Theta_{3,2}^{(1)}x_2 + \Theta_{3,3}^{(1)}x_3) \\
+    h_{\Theta}(x) & = a_1^{(3)} = g(\Theta_{1,0}^{(2)}a_0^{(2)} + \Theta_{1,1}^{(2)}a_1^{(2)} + \Theta_{1,2}^{(2)}a_2^{(2)} + \Theta_{1,3}^{(2)}a_3^{(2)})
+    \end{align*} \]
+</p>
+
+<p>
+\(a_{i}^{(j)}\) is the <b>activation</b> of unit \(i\) in layer \(j\).
+</p>
+
+<p>
+\(\Theta^{(j)}\) is the matrix of weights controlling function mapping from layer \(j\) to layer \(j+1\).
+</p>
+
+<p>
+If network has \(S_j\) units in layer \(j\),
+\(S_{j+1}\) units in layer \(j+1\),
+then \(\Theta^{(j)} \in \mathbb{R}^{S_{j+1}\times (S_j + 1)}\).
+</p>
+</div>
+</div>
+<div id="outline-container-orgeb41de2" class="outline-4">
+<h4 id="orgeb41de2"><span class="section-number-4">5.2.2</span> Forward Propagation: Vectorized Implementation</h4>
+<div class="outline-text-4" id="text-5-2-2">
+<p>
+\[\begin{align*}
+    z^{(2)} & = \Theta^{(1)}a^{(1)}, a^{(1)} = x \\
+    a^{(2)} & = g(z^{(2)}) \\
+    z^{(3)} & = \Theta^{(2)}a^{(2)} \\
+    h_{\Theta} & = a^{(3)} = g(z^{(3)})
+    \end{align*} \]
+</p>
+
+<p>
+\(g\) is the sigmoid function.
+</p>
+</div>
+</div>
+<div id="outline-container-orgad470e5" class="outline-4">
+<h4 id="orgad470e5"><span class="section-number-4">5.2.3</span> Output Units: One-vs-all</h4>
+<div class="outline-text-4" id="text-5-2-3">
+
+<div class="figure">
+<p><img src="./obipy-resources/CIV1fL.png" alt="CIV1fL.png" />
+</p>
+</div>
+
+<p>
+With a training set : \(((x^{(1)},y^{(1)}), (x^{(2)},y^{(2)}), \dots, (x^{(m)},y^{(m)}))\),
+</p>
+
+<p>
+\[ y^{(i)}\text{ is one of }
+    \begin{bmatrix} 1 \\ 0 \\ 0 \\ 0 \end{bmatrix},
+    \begin{bmatrix} 0 \\ 1 \\ 0 \\ 0 \end{bmatrix},
+    \begin{bmatrix} 0 \\ 0 \\ 1 \\ 0 \end{bmatrix},
+    \begin{bmatrix} 0 \\ 0 \\ 0 \\ 1 \end{bmatrix} \]
+</p>
+</div>
+</div>
+<div id="outline-container-org705e07b" class="outline-4">
+<h4 id="org705e07b"><span class="section-number-4">5.2.4</span> Cost Function</h4>
+<div class="outline-text-4" id="text-5-2-4">
+<ul class="org-ul">
+<li>\(L\) = total number of layers in the network.</li>
+<li>\(S_l\) = number of units (not counting bias unit) in layer \(l\).</li>
+<li>\(K = S_L\) is the number of units in the output layer.</li>
+</ul>
+
+<p>
+\[J(\Theta) = -\frac{1}{m}\bigg[\sum_{i=1}^m \sum_{k=1}^K y_k^{(i)}log(h_\Theta(x^{(i)}))_k + (1-y_k^{(i)})log(1 - (h_\Theta(x^{(i)}))_k)\bigg] + \frac{\lambda}{2m}\sum_{l=1}^L\sum_{i=1}^{S_l}\sum_{j=1}^{S_{l+1}}(\Theta_{j,i}^{(l)})^2\]
+</p>
+
+<p>
+\(h_\Theta(x) \in \mathbb{R}^K\), \((h_\theta(x))_k\) is the \(k^{th}\) output of the hypothesis.
+</p>
+
+<p>
+\(\lambda\) is the <b>regularization parameter</b>.
+</p>
+
+<p>
+\(i\) starts at \(1\), we <b>do not</b> regularize \(\Theta_{j,0}^{(l)}\)!
+</p>
+</div>
+</div>
+<div id="outline-container-orgcdea28c" class="outline-4">
+<h4 id="orgcdea28c"><span class="section-number-4">5.2.5</span> Gradient Computation</h4>
+<div class="outline-text-4" id="text-5-2-5">
+
+<div class="figure">
+<p><img src="./obipy-resources/VdZfFK.png" alt="VdZfFK.png" />
+</p>
+</div>
+
+<p>
+\[ \begin{align*}
+    \delta^{(4)} & = \frac{\partial\: J(\theta)}{\partial\: z^{(4)}} = a^{(4)} - y,\: a^{(4)} = h_\Theta(x) \\
+    \delta^{(3)} & = \frac{\partial\: J(\theta)}{\partial\: z^{(3)}} = (\Theta^{(3)})^\top\delta^{(4)}\:.*\:g'(z^{(3)}) = (\Theta^{(3)})^\top\delta^{(4)}\:.*\:\frac{\partial\: a^{(3)}}{\partial\: z^{(3)}} = (\Theta^{(3)})^\top\delta^{(4)}\:.*\:a^{(3)}(1 - a^{(3)}) \\
+    \delta^{(2)} & = \frac{\partial\: J(\theta)}{\partial\: z^{(2)}} = (\Theta^{(2)})^\top\delta^{(3)}\:.*\:a^{(2)}(1 - a^{(2)})
+    \end{align*} \]
+</p>
+
+<p>
+<b>There is no \(\delta^{(1)}\)!</b>
+</p>
+
+<p>
+If we ignore \(\lambda\) or if \(\lambda = 0\):
+</p>
+
+<p>
+\[\frac{\partial\: J(\Theta)}{\partial\: \Theta_{ij}^{(l)}} = a_j^{(l)}\delta_i^{(l+1)}\]
+</p>
+</div>
+</div>
+
+<div id="outline-container-org3680c45" class="outline-4">
+<h4 id="org3680c45"><span class="section-number-4">5.2.6</span> Backpropagation Algorithm</h4>
+<div class="outline-text-4" id="text-5-2-6">
+<p>
+Given a training set \(\{(x^{(1)},y^{(1)}),\dots,(x^{(m)},y^{(m)})\}\).
+</p>
+
+<p>
+Set \(\Delta_{ij}^{(l)} = 0\) (for all \(l\), \(i\), \(j\)), to serve as a gradient accumulator.
+</p>
+
+<p>
+For \(i = 1\) to \(m\):
+</p>
+<ol class="org-ol">
+<li>Set \(a^{(1)} = x^{(i)}\).</li>
+<li>Perform forward propagation to compute \(a^{(l)}\) for \(l = 2,3,\dots,L\).</li>
+<li>Using \(y^{(i)}\), compute \(\delta^{(L)} = a^{(L)} - y^{(i)}\).</li>
+<li>Compute \(\delta^{(L-1)}, \delta^{(L-2)},\dots,\delta^{(2)}\).</li>
+<li>Increment the gradient \(\Delta_{ij}^{(l)} = \Delta_{ij}^{(l)} + a_j^{(l)}\delta_i^{(l+1)}\), vectorized as \(\Delta^{(l)} = \Delta^{(l)} + \delta^{(l+1)}(a^{(l)})^{\top}\).</li>
+</ol>
+
+<p>
+Then, we can compute the gradients:
+</p>
+
+<p>
+\[\begin{array}{l}
+    D_{ij}^{(l)} = \frac{1}{m}\:\Delta_{ij}^{(l)} + \frac{\lambda}{m}\Theta_{ij}^{(l)} & \text{if } j \neq 0 \\
+    D_{ij}^{(l)} = \frac{1}{m}\:\Delta_{ij}^{(l)} & \text{if } j = 0
+    \end{array}\Bigg\}\:
+    \frac{\partial\: J(\Theta)}{\partial\: \Theta_{ij}^{(l)}} = D_{ij}^{(l)}\]
+</p>
+</div>
+</div>
+<div id="outline-container-org07b5a83" class="outline-4">
+<h4 id="org07b5a83"><span class="section-number-4">5.2.7</span> Unrolling Parameters</h4>
+<div class="outline-text-4" id="text-5-2-7">
+<p>
+In advanced optimization implementations, the gradient matrix often need to be "flattened" to a single vector.
+</p>
+</div>
+</div>
+<div id="outline-container-org308da40" class="outline-4">
+<h4 id="org308da40"><span class="section-number-4">5.2.8</span> Gradient Checking</h4>
+<div class="outline-text-4" id="text-5-2-8">
+<p>
+Compute the gradient using the <b>Central Difference Formula</b>.
+</p>
+
+<p>
+\[ \begin{align*}
+    & \frac{\partial\: J(\Theta)}{\partial\: \Theta_j} \approx \frac{J(\Theta_1,\Theta_2,\dots,\Theta_j + \epsilon,\dots,\Theta_n) - J(\Theta_1,\Theta_2,\dots,\Theta_j - \epsilon,\dots,\Theta_n)}{2\epsilon} \\
+    & \Theta \in \mathbb{R}^n, \Theta\text{ is an unrolled version of }\Theta^{(1)},\Theta^{(2)},\dots,\Theta^{(L-1)} \\
+    & \Theta = [\Theta_1,\Theta_2,\dots,\Theta_n] \\
+    & \epsilon = 10^{-4}
+    \end{align*} \]
+</p>
+
+<p>
+Finally, check the numerical estimation of the gradient against the backprop calculated gradient by calculating the <b>relative difference</b> between them:
+</p>
+
+<p>
+\[\Delta = \frac{\|D_{numerical}(\theta)-D(\theta)\|}{\|D_{numerical}(\theta)+D(\theta)\|}\]
+</p>
+
+<p>
+\(\Delta\) should be small, on the order of \(10^{-9}\).
+</p>
+</div>
+</div>
+<div id="outline-container-orgc457ccd" class="outline-4">
+<h4 id="orgc457ccd"><span class="section-number-4">5.2.9</span> Random Initialization</h4>
+<div class="outline-text-4" id="text-5-2-9">
+<p>
+We cannot initialize the parameters to \(0\)!
+</p>
+
+<p>
+Instead, we initialize each \(\Theta_{ij}^{(l)}\) to a random value in \([-\epsilon,\epsilon]\).
+</p>
+
+<p>
+For \(\theta^{(l)}\), it is an effective strategy to choose \(\epsilon\) as:
+</p>
+
+<p>
+\[\epsilon = \frac{\sqrt{6}}{\sqrt{S_{l}+S_{l+1}}}\]
+</p>
+</div>
+</div>
+<div id="outline-container-org0a4da35" class="outline-4">
+<h4 id="org0a4da35"><span class="section-number-4">5.2.10</span> Training A Neural Network</h4>
+<div class="outline-text-4" id="text-5-2-10">
+<p>
+The number of input units \(S_1\) is the dimension of features \(x^{(i)}\).
+</p>
+
+<p>
+The number of output units \(S_L\) is the number of classes \(K\).
+</p>
+
+<p>
+We can have \(1\) or more hidden layers with the same number of units in each layer.
+</p>
+
+<p>
+Training:
+</p>
+<ol class="org-ol">
+<li>Randomly <b>initialize weights</b>.</li>
+<li>Implement <b>forward propagation</b> to get \(h_\Theta(x^{(i)})\) for each \(x^{(i)}\).</li>
+<li>Implement code to compute <b>Cost function</b> \(J(\Theta)\).</li>
+<li>Implement <b>backprop</b> to compute partial derivatives \(\frac{\partial}{\partial\: \Theta_{ij}^{(l)}}J(\Theta)\).</li>
+<li>Use <b>gradient checking</b> to compare \(\displaystyle \frac{\partial}{\partial\: \Theta_{ij}^{(l)}}J(\Theta)\) computed using backpropagation vs. using numerical estimation of gradient of \(J(\Theta)\).</li>
+<li>Use <b>gradient descent</b> or <b>advanced optimization</b> methods with backpropagation to try to minimize \(J(\Theta)\) as a function of parameters \(\Theta\).</li>
+</ol>
+
+<p>
+\(J(\Theta)\) is <b>non-convex</b>!
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org8985aaf" class="outline-2">
+<h2 id="org8985aaf"><span class="section-number-2">6</span> Debugging a Learning Algorithm</h2>
+<div class="outline-text-2" id="text-6">
+</div>
+<div id="outline-container-orgf13087d" class="outline-3">
+<h3 id="orgf13087d"><span class="section-number-3">6.1</span> Evaluating your Hypothesis</h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+Split your examples between a <b>Training Set (70%)</b> and a <b>Test Set (30%)</b>.
+</p>
+
+<p>
+If the data is not randomly ordered, it is better to randomly shuffle it before picking these sets.
+</p>
+</div>
+</div>
+<div id="outline-container-org2462be0" class="outline-3">
+<h3 id="org2462be0"><span class="section-number-3">6.2</span> Training/Testing procedure for Linear Regression</h3>
+<div class="outline-text-3" id="text-6-2">
+<ul class="org-ul">
+<li>Learn parameter \(\theta\) from training data (minimizing training error \(J(\theta)\)).</li>
+<li>Compute test set error:</li>
+</ul>
+
+<p>
+\[J_{test}(\theta) = \frac{1}{2m_{test}}\sum_{i=1}^{m_{test}}(h_{\theta}(x_{test}^{(i)}) - y_{test}^{(i)})^2\]
+</p>
+</div>
+</div>
+<div id="outline-container-orgaae37fb" class="outline-3">
+<h3 id="orgaae37fb"><span class="section-number-3">6.3</span> Training/Testing procedure for Logistic Regression</h3>
+<div class="outline-text-3" id="text-6-3">
+<ul class="org-ul">
+<li>Learn parameter \(\theta\) from training data.</li>
+<li>Compute test set error:</li>
+</ul>
+
+<p>
+\[J_{test}(\theta) = -\frac{1}{m_{test}}\sum_{i=1}^{m_{test}} y_{test}^{(i)}\log(h_{\theta}(x_{test}^{(i)})) + (1 -  y_{test}^{(i)})\log(1 - h_{\theta}(x_{test}^{(i)}))\]
+</p>
+
+<ul class="org-ul">
+<li>or the alternative <b>Misclassification error</b> (0/1 misclassification error):</li>
+</ul>
+
+<p>
+\[
+\begin{align*}
+err(h_{\theta}(x),y) & = \begin{cases}
+    1 & \text{ if } & h_{\theta}(x) \ge 0.5, y = 0 \\
+     & \text{ or if } & h_{\theta}(x) \lt 0.5, y = 1 \\
+    0 & \text{ otherwise} &
+\end{cases} \\
+\text{Test error} & = \frac{1}{m_{test}}\sum_{i=1}^{m_{test}}err(h_{\theta}(x_{test}^{(i)}),y_{test}^{(i)})
+\end{align*}\]
+</p>
+</div>
+</div>
+<div id="outline-container-org70e16c8" class="outline-3">
+<h3 id="org70e16c8"><span class="section-number-3">6.4</span> Model Selection and Training/Validation/Test sets</h3>
+<div class="outline-text-3" id="text-6-4">
+<p>
+To find the <b>degree \(d\)</b> of a polynomial feature:
+</p>
+
+<ol class="org-ol">
+<li>Split your examples between a <b>Training Set (60%)</b>, a <b>Cross Validation Set (20%)</b> and a <b>Test Set (20%)</b>.</li>
+<li>Fit \(\theta^{(d)}\) for different values of \(d\) on the <b>Training Set</b>.</li>
+</ol>
+
+<p>
+\[J_{train}(\theta) = \frac{1}{2m_{train}}\sum_{i=1}^{m_{train}}(h_{\theta}(x_{train}^{(i)}) - y_{train}^{(i)})^2\]
+</p>
+
+<ol class="org-ol">
+<li>Pick \(\theta^{(d)}\) with the lowest cost on <b>Validation Set</b>.</li>
+</ol>
+
+<p>
+\[J_{cv}(\theta) = \frac{1}{2m_{cv}}\sum_{i=1}^{m_{cv}}(h_{\theta}(x_{cv}^{(i)}) - y_{cv}^{(i)})^2\]
+</p>
+
+<ol class="org-ol">
+<li>Estimate generalization error on <b>Test Set</b> with selected \(\theta^{(d)}\).</li>
+</ol>
+
+<p>
+\[J_{test}(\theta) = \frac{1}{2m_{test}}\sum_{i=1}^{m_{test}}(h_{\theta}(x_{test}^{(i)}) - y_{test}^{(i)})^2\]
+</p>
+</div>
+</div>
+<div id="outline-container-orgb9d8753" class="outline-3">
+<h3 id="orgb9d8753"><span class="section-number-3">6.5</span> Diagnosing Bias vs Variance in Model Selection</h3>
+<div class="outline-text-3" id="text-6-5">
+<p>
+If we have a <b>Bias (underfit)</b> problem:
+</p>
+
+<p>
+\[\begin{align*}
+   & J_{train}(\theta)\text{ and }J_{cv}(\theta)\text{ will be high.} \\
+   & J_{cv}(\theta) \approx J_{train}(\theta)
+   \end{align*}\]
+</p>
+
+<p>
+If we have a <b>Variance (overfit)</b> problem:
+</p>
+
+<p>
+\[\begin{align*}
+   & J_{train}(\theta)\text{ will be low.} \\
+   & J_{cv}(\theta) \gg J_{train}(\theta)
+   \end{align*}\]
+</p>
+</div>
+</div>
+<div id="outline-container-orgbf3be6b" class="outline-3">
+<h3 id="orgbf3be6b"><span class="section-number-3">6.6</span> Choosing the Regularization Parameter \(\lambda\)</h3>
+<div class="outline-text-3" id="text-6-6">
+<p>
+To find the <b>regularization parameter \(\lambda\)</b> of a polynomial feature:
+</p>
+
+<ol class="org-ol">
+<li>Split your examples between a <b>Training Set (60%)</b>, a <b>Cross Validation Set (20%)</b> and a <b>Test Set (20%)</b>.</li>
+<li>Fit \(\theta^{(\lambda)}\) for different values of \(\lambda\) on the <b>Training Set</b> using <b>regularized cost function</b>.</li>
+</ol>
+
+<p>
+\[\begin{align*}
+   & J_{train}(\theta) = \frac{1}{2m_{train}}\sum_{i=1}^{m_{train}}(h_{\theta}(x_{train}^{(i)}) - y_{train}^{(i)})^2 + \frac{\lambda}{2m_{train}}\sum_{j=1}^{n}\theta_{j}^{2} \\
+   & \lambda \in \{0, 0.01, 0.02, 0.04, 0.08,\dots, 10.24\}
+   \end{align*}\]
+</p>
+
+<ol class="org-ol">
+<li>Pick \(\theta^{(\lambda)}\) with the lowest cost on <b>Validation Set</b>, using <b>un-regularized cost function</b>.</li>
+</ol>
+
+<p>
+\[ J_{cv}(\theta) = \frac{1}{2m_{cv}}\sum_{i=1}^{m_{cv}}(h_{\theta}(x_{cv}^{(i)}) - y_{cv}^{(i)})^2\]
+</p>
+
+<ol class="org-ol">
+<li>Estimate generalization error on <b>Test Set</b> with selected \(\theta^{(\lambda)}\), using <b>un-regularized cost function</b>.</li>
+</ol>
+
+<p>
+\[ J_{test}(\theta) = \frac{1}{2m_{test}}\sum_{i=1}^{m_{test}}(h_{\theta}(x_{test}^{(i)}) - y_{test}^{(i)})^2\]
+</p>
+</div>
+</div>
+<div id="outline-container-org647fa0f" class="outline-3">
+<h3 id="org647fa0f"><span class="section-number-3">6.7</span> Learning Curves</h3>
+<div class="outline-text-3" id="text-6-7">
+<p>
+To plot learning curves:
+</p>
+
+<ol class="org-ol">
+<li>Split your examples between a <b>Training Set (60%)</b>, a <b>Cross Validation Set (20%)</b> and a <b>Test Set (20%)</b>.</li>
+<li><p>
+Fit \(\theta^{(m)}\) for samples of size \(m\) of the <b>Training Set</b> using <b>regularized or un-regularized cost function</b>.
+</p>
+
+<p>
+\[\begin{align*}
+      & J_{train}(\theta) = \frac{1}{2m_{train}}\sum_{i=1}^{m_{train}}(h_{\theta}(x_{train}^{(i)}) - y_{train}^{(i)})^2 \\
+      & \text{or:} \\
+      & J_{train}(\theta) = \frac{1}{2m_{train}}\sum_{i=1}^{m_{train}}(h_{\theta}(x_{train}^{(i)}) - y_{train}^{(i)})^2 + \frac{\lambda}{2m_{train}}\sum_{j=1}^{n}\theta_{j}^{2}
+      \end{align*}\]
+</p></li>
+
+<li><p>
+Plot \(J(\theta^{(m)})\) on <b>Training Set</b> for each \(\theta^{(m)}\), using <b>un-regularized cost function</b>.
+</p>
+
+<p>
+\[J_{train}(\theta) = \frac{1}{2m_{train}}\sum_{i=1}^{m_{train}}(h_{\theta}(x_{train}^{(i)}) - y_{train}^{(i)})^2\]
+</p></li>
+
+<li><p>
+Plot \(J(\theta^{(m)})\) on <b>Validation Set</b> for each \(\theta^{(m)}\), using <b>un-regularized cost function</b>.
+</p>
+
+<p>
+\[J_{cv}(\theta) = \frac{1}{2m_{cv}}\sum_{i=1}^{m_{cv}}(h_{\theta}(x_{cv}^{(i)}) - y_{cv}^{(i)})^2\]
+</p></li>
+</ol>
+
+
+<p>
+If a learning algorithm is suffering from <b>high bias</b>, getting more data will not help much.
+</p>
+
+<p>
+If a learning algorithm is suffering from <b>high variance</b>, getting more data is likely to help.
+</p>
+</div>
+</div>
+<div id="outline-container-orge5701a8" class="outline-3">
+<h3 id="orge5701a8"><span class="section-number-3">6.8</span> Deciding what to do next</h3>
+<div class="outline-text-3" id="text-6-8">
+<ul class="org-ul">
+<li>Get more training examples \(\rightarrow\) <b>fixes high variance</b>.</li>
+<li>Try smaller set of features \(\rightarrow\) <b>fixes high variance</b>.</li>
+<li>Try getting additional features \(\rightarrow\) <b>fixes high bias</b>.</li>
+<li>Try adding polynomial features \(\rightarrow\) <b>fixes high bias</b>.</li>
+<li>Try increasing \(\lambda\) \(\rightarrow\) <b>fixes high variance</b>.</li>
+<li>Try decreasing \(\lambda\) \(\rightarrow\) <b>fixes high bias</b>.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgec32168" class="outline-3">
+<h3 id="orgec32168"><span class="section-number-3">6.9</span> Neural Networks and Overfitting</h3>
+<div class="outline-text-3" id="text-6-9">
+<p>
+<i>Small</i> neural networks:
+</p>
+<ul class="org-ul">
+<li>Are more prone to underfitting.</li>
+<li>are computationally cheaper.</li>
+</ul>
+
+<p>
+<i>Large</i> neural networks:
+</p>
+<ul class="org-ul">
+<li>Are more prone to overfitting, which can be adressed by using regularization (\(\lambda\)).</li>
+<li>Are computationally more expensive.</li>
+<li>We can choose the number of hidden layers by fitting \(\theta^{(L)}\) for an increasing number of hidden layers(\(L\)) on a <b>Training Set</b>,</li>
+</ul>
+<p>
+then pick the lowest cost on a <b>Validation Set</b>. 
+</p>
+</div>
+</div>
+<div id="outline-container-org8f75065" class="outline-3">
+<h3 id="org8f75065"><span class="section-number-3">6.10</span> Recommended Approach</h3>
+<div class="outline-text-3" id="text-6-10">
+<ol class="org-ol">
+<li>Start with a <b>simple algorithm</b> that you can implement quickly. Implement it and test it on your cross-validation data.</li>
+<li>Plot <b>learning curves</b> to decide if more data, or features, etc. are likely to help.</li>
+<li><b>Error analysis</b>: Manually examine the examples(in cross-validation set) that your algorithm made erros on. See if you can spot any systematic trend in what type of example it is make errors on by comparing model accuracies.</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgc8c897b" class="outline-3">
+<h3 id="orgc8c897b"><span class="section-number-3">6.11</span> Error Metrics for Skewed Classes</h3>
+<div class="outline-text-3" id="text-6-11">
+<p>
+We have a case of <b>skewed classes</b> when we have far more examples of one class than the other classes.
+</p>
+
+<p>
+With <b>skewed classes</b> it becomes much harder to use classification accuracy!
+</p>
+</div>
+</div>
+<div id="outline-container-org9ac7640" class="outline-3">
+<h3 id="org9ac7640"><span class="section-number-3">6.12</span> Precision/Recall</h3>
+<div class="outline-text-3" id="text-6-12">
+<p>
+\(y = 1\) in presence of a rare class that we want to detect.
+</p>
+<style>
+  table {
+    margin: 0 auto;
+  }
+  td {
+    border: 1px solid black;
+}
+</style>
+<table>
+  <tr>
+    <td style="border: 0" colspan="2" rowspan="2" align="left" valign="top">
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+    <td colspan="2" align="left" valign="top">
+      &nbsp;&nbsp;Actual&nbsp;Class&nbsp;&nbsp;&nbsp;<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">
+      &nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+    <td align="left" valign="top">
+      &nbsp;&nbsp;&nbsp;0&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td rowspan="2" align="left" valign="top">
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+      Predicted<br />
+      &nbsp;&nbsp;Class&nbsp;&nbsp;<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+    <td align="left" valign="top">
+      &nbsp;&nbsp;1&nbsp;&nbsp;<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+    <td align="left" valign="top">
+      &nbsp;&nbsp;True&nbsp;&nbsp;<br />
+      positive
+    </td>
+    <td align="left" valign="top">
+      &nbsp;False&nbsp;&nbsp;<br />
+      positive
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">
+      &nbsp;&nbsp;0&nbsp;&nbsp;<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+    <td align="left" valign="top">
+      &nbsp;False&nbsp;&nbsp;<br />
+      negative
+    </td>
+    <td align="left" valign="top">
+      &nbsp;&nbsp;True&nbsp;&nbsp;<br />
+      negative
+    </td>
+  </tr>
+</table>
+
+<p>
+<b>Precision</b>:
+</p>
+
+<p>
+\[\begin{align*}
+   & \frac{\text{True Positives}}{\text{Predicted Positives}} = \frac{\text{True Positives}}{\text{True Positive}+\text{False Positives}} \\
+   & \\
+   & \text{High precision is a good thing.}
+   \end{align*}\]
+</p>
+
+<p>
+<b>Recall</b>:
+</p>
+
+<p>
+\[\begin{align*}
+   & \frac{\text{True Positives}}{\text{Actual Positives}} = \frac{\text{True Positives}}{\text{True Positives}+\text{False Negatives}} \\
+   & \\
+   & \text{High recall is a good thing.}
+   \end{align*}\]
+</p>
+
+<p>
+A classifier with <b>high presision</b> and <b>high recall</b> is a good classifier.
+</p>
+
+<p>
+<b>Precision/Recall</b> is often a better way to evaluate an algorithm in the presence of <b>skewed classes</b> than looking at classificator error or classificator accuracy.
+</p>
+</div>
+</div>
+<div id="outline-container-org66596a3" class="outline-3">
+<h3 id="org66596a3"><span class="section-number-3">6.13</span> F\(_{1}\) Score (F Score)</h3>
+<div class="outline-text-3" id="text-6-13">
+<p>
+To compare precision/recall numbers:
+</p>
+
+<p>
+\[ 2\frac{PR}{P+R}\]
+</p>
+
+<ul class="org-ul">
+<li>If \(P = 0\) or \(R = 0\) then F-Score \(= 0\).</li>
+<li>If \(P = 1\) and \(R = 1\) then F-Score \(= 1\).</li>
+<li>\(0 \le\) F-Score \(\le 1\)</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org1b997f7" class="outline-3">
+<h3 id="org1b997f7"><span class="section-number-3">6.14</span> Threshold</h3>
+<div class="outline-text-3" id="text-6-14">
+<p>
+In Logistic Regression:
+</p>
+
+<p>
+\[\begin{align*}
+   & 0 \le h_{\theta}(x) \le 1 \\
+   & \text{Predict }1\text{ if }h_{\theta}(x) \ge\text{ threshold} \\
+   & \text{Predict }0\text{ if }h_{\theta}(x) \lt\text{ threshold} \\
+   \end{align*}\]
+</p>
+
+<p>
+By varying the threshold we can control the trade-off between precision and recall.
+</p>
+<ul class="org-ul">
+<li>With a high threshold, we get a high presision and a low recall.</li>
+<li>With a low threshold, we get a low presision and a high recall.</li>
+</ul>
+
+<p>
+To find the optimal <b>threshold</b> for your model:
+</p>
+<ul class="org-ul">
+<li>Evaluate different values of <b>threshold</b> on the <b>Cross Validation Set</b> and pick the one that gives you the maximum value of <b>F Score</b>.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org625f3d5" class="outline-2">
+<h2 id="org625f3d5"><span class="section-number-2">7</span> Support Vector Machines (SVM)</h2>
+<div class="outline-text-2" id="text-7">
+<ul class="org-ul">
+<li>Unlike <b>Logistic Regression</b>, \(h_{\theta}(x)\) doesn't give us a probability, but instead we get a direct prediction of 1 or 0.</li>
+<li>SVM has a convex optimization problem, so you get a <b>global minimum</b>.</li>
+</ul>
+</div>
+<div id="outline-container-org88381d9" class="outline-3">
+<h3 id="org88381d9"><span class="section-number-3">7.1</span> C Regularization</h3>
+<div class="outline-text-3" id="text-7-1">
+<ul class="org-ul">
+<li><b>Large C</b> gives a hypothesis of <b>high variance</b>, very <b>sensitive to outliers</b>.</li>
+<li><b>Small C</b> gives a hypothesis of <b>high bias</b>.</li>
+</ul>
+
+<p>
+\[C = \frac{1}{\lambda}\].
+</p>
+</div>
+</div>
+<div id="outline-container-org85349be" class="outline-3">
+<h3 id="org85349be"><span class="section-number-3">7.2</span> Gaussian Kernel (Radial Basis Function Kernel)</h3>
+<div class="outline-text-3" id="text-7-2">
+<p>
+Choose Gaussian Kernel when <b>\(n\) is small</b> and/or <b>\(m\) is large</b>.
+</p>
+
+<p>
+e.g. A large 2D training set.
+</p>
+
+<p>
+Make sure you perform <b>feature scaling</b> before using a Gaussian kernel!
+</p>
+
+<p>
+\[\begin{align*}
+   K(x, x') &= \exp(-\frac{\|x - x'\|^2}{2\sigma^2}) &\\
+   & = \exp(-\gamma\|x - x'\|^2) &\text{where } \gamma = \frac{1}{2\sigma^2}
+   \end{align*}\]
+</p>
+
+<p>
+Define \(\sigma^2\):   
+</p>
+<ul class="org-ul">
+<li><b>Large \(\sigma^2\) (small \(\gamma\))</b> gives <b>high bias</b>.</li>
+<li><b>Small \(\sigma^2\) (large \(\gamma\))</b> gives <b>high variance</b>.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgd65bf71" class="outline-3">
+<h3 id="orgd65bf71"><span class="section-number-3">7.3</span> Linear Kernel</h3>
+<div class="outline-text-3" id="text-7-3">
+<p>
+Means <b>No Kernel</b>!
+</p>
+
+<p>
+Choose Linear Kernel when <b>\(n\) is large</b> and <b>\(m\) is small</b>.
+</p>
+
+<p>
+e.g. A training set with lots of features but few examples.
+</p>
+
+<p>
+If the <b>number of features is large</b>, using the <b>linear kernel is good enough</b>!
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org7d16181" class="outline-2">
+<h2 id="org7d16181"><span class="section-number-2">8</span> K-means</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+K Means is a <b>Clustering Algorithm</b> that groups the data into coherent clusters.
+</p>
+
+<p>
+Inputs:
+</p>
+<ul class="org-ul">
+<li>\(K\) (number of clusters)</li>
+<li>Training Set with <b>no labels</b> associated \(\{x^{(1)}, x^{(2)}, \dots, x^{(m)}\}\), \(x^{(i)} \in \mathbb{R}^n\)</li>
+</ul>
+</div>
+<div id="outline-container-orgee9bfba" class="outline-3">
+<h3 id="orgee9bfba"><span class="section-number-3">8.1</span> Distortion Cost Function</h3>
+<div class="outline-text-3" id="text-8-1">
+<p>
+\[J(c^{(i)},\dots,c^{(m)},\mu_1,\dots,\mu_K) = \frac{1}{m}\sum_{i=1}^{m}\|x^{(i)} - \mu_{c^{(i)}}\|^2\]
+</p>
+
+
+<p>
+\(c^{(i)}\) = index of cluster \((1,2,\dots,K)\) to wich example \(x^{(i)}\) is currently assigned, \(i \in \mathbb{R}^m\).
+</p>
+
+<p>
+\(\mu_k\) = cluster centroid \(k\) \((k \in \{1,2,\dots,K\},\:\mu_k \in \mathbb{R}^n)\).
+</p>
+
+<p>
+\(\mu_{c^{(i)}}\) = cluster centroid of cluster to which example \(x^{(i)}\) has been assigned.
+</p>
+
+<p>
+J is <b>not convex</b>.
+</p>
+</div>
+</div>
+<div id="outline-container-org563afe6" class="outline-3">
+<h3 id="org563afe6"><span class="section-number-3">8.2</span> Algorithm</h3>
+<div class="outline-text-3" id="text-8-2">
+<ol class="org-ol">
+<li>Randomly initialize \(K\) <b>cluster centroids</b> \(\mu_1, \mu_2, \dots, \mu_K\).</li>
+<li>Repeat:
+<ul class="org-ul">
+<li><p>
+for \(i=1\) to \(m\):
+</p>
+
+<p>
+Minimize \(J\) w.r.t \(\:c^{(1)},\dots,c^{(m)}\).
+</p>
+
+<p>
+\(c^{(i)}\) = index (from \(1\) to \(K\)) of cluster centroid <b>closest</b> to \(x^{(i)}\).
+</p></li>
+<li><p>
+for \(k=1\) to \(K\):
+</p>
+
+<p>
+Minimize \(J\) w.r.t \(\:\mu_{(1)},\dots,\mu_{(K)}\).
+</p>
+
+<p>
+\(\mu_k\) = <b>average (mean)</b> of points assigned to cluster \(k\).
+</p></li>
+</ul></li>
+</ol>
+
+<p>
+If a <b>cluster has no points</b> assigned to it, just <b>eliminate</b> it, ended up with \(K-1\) clusters.
+</p>
+</div>
+</div>
+<div id="outline-container-org3cbab8c" class="outline-3">
+<h3 id="org3cbab8c"><span class="section-number-3">8.3</span> Random Initialization</h3>
+<div class="outline-text-3" id="text-8-3">
+<ol class="org-ol">
+<li>Randomly pick \(K\) training examples, \(k < m\).</li>
+<li>Set \(\mu_1, \mu_2, \dots, \mu_K\) to these examples.</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgc1fd372" class="outline-3">
+<h3 id="orgc1fd372"><span class="section-number-3">8.4</span> Local Optima</h3>
+<div class="outline-text-3" id="text-8-4">
+<p>
+To avoid K Means getting stuck at <b>local optima when \(K < 10\)</b> and increase the odds of finding the best possible clustering, we try <b>multiple random initialization</b>.
+</p>
+
+<p>
+For \(i=1\) to \(100\):
+</p>
+<ul class="org-ul">
+<li><b>Randomly initialize</b> K-means.</li>
+<li><b>Run</b> K-means. Get \(c^{(1)},\dots,c^{(m)},\mu_{(1)},\dots,\mu^{(K)}\).</li>
+<li><b>Compute Distortion Cost Function</b> \(J(c^{(1)},\dots,c^{(m)},\mu_{(1)},\dots,\mu^{(K)})\).</li>
+</ul>
+
+<p>
+<b>Pick</b> clustering that gave the <b>lowest cost</b>.
+</p>
+
+<p>
+When <b>\(K\) is large</b> the optimal clustering is often found quite early and <b>this is not needed</b>.
+</p>
+</div>
+</div>
+<div id="outline-container-org7ea54f4" class="outline-3">
+<h3 id="org7ea54f4"><span class="section-number-3">8.5</span> Choosing Number of Clusters (\(K\))</h3>
+<div class="outline-text-3" id="text-8-5">
+<p>
+We can use the <b>elbow method</b> by plotting the <b>Cost</b> w.r.t the <b>number of clusters</b>. Although it's often not very useful.
+</p>
+
+<p>
+We can also choose <b>K</b> in regard of our needs.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org0b6ef12" class="outline-2">
+<h2 id="org0b6ef12"><span class="section-number-2">9</span> Principal Components Analysis (PCA)</h2>
+<div class="outline-text-2" id="text-9">
+<p>
+PCA is a procedure that uses an orthogonal transformation to convert a set of examples of possibly correlated features into a set of values of linearly uncorrelated variables called Principal Components.
+</p>
+</div>
+<div id="outline-container-org99adc2d" class="outline-3">
+<h3 id="org99adc2d"><span class="section-number-3">9.1</span> Algorithm</h3>
+<div class="outline-text-3" id="text-9-1">
+<p>
+\(A \in \mathbb{R}^{m \times n}\), \(m\) is the number of examples, \(n\) is the number of features.
+</p>
+
+<p>
+We need to choose <b>vectors</b> onto which to project the data \(A\) as to <b>maximize the variance</b> of the data (or <b>minimize the projection error</b>).
+</p>
+
+<p>
+Before using PCA it is important to apply <b>mean normalization</b> and, if necessary (features are on different scales), <b>feature scaling</b> to the data \(A\):
+</p>
+
+<p>
+\[\begin{align*}
+   & A_{normalized} = \frac{A - \mu}{\sigma} \\
+   & \mu \text{ is the }\textbf{vector of the features means.} \\
+   & \sigma \text{ is the }\textbf{vector of the features standard-deviations.}
+   \end{align*}\]
+</p>
+
+<p>
+Compute the <b>Covariance Matrix</b> of the data \(A\):
+</p>
+
+<p>
+\[C = \frac{A_{normalized}^{\top} A_{normalized}}{m - 1}\]
+</p>
+
+<p>
+Proceed to the <b>Singular Value Decomposition (SVD)</b> of the <b>Covariance Matrix \(C\)</b>:
+</p>
+
+<p>
+\[C = U \Sigma V^{\top}\]
+</p>
+
+<p>
+where:
+</p>
+
+<p>
+\[\begin{align*}
+   & C C^{\top} = (U \Sigma V^{\top})(U \Sigma V^{\top})^{\top} = U \Sigma V^{\top} V \Sigma^{\top} U^{\top} = U \Sigma^{2} U^{\top} \\
+   & C^{\top} C = (U \Sigma V^{\top})^{\top}(U \Sigma V^{\top}) = V \Sigma^{\top} U^{\top} U \Sigma V^{\top} = V \Sigma^{2} V^{\top} \\
+   & C = Q \Lambda Q^{\top} \\
+   & C = C^{\top} \longrightarrow U = V = Q \text{ and } \Sigma = \Lambda \\
+   & \\
+   & U \text{ and } V \text{ are }\textbf{equal and othogonal}\text{ matrices which contains the }\textbf{Principal Components.} \\
+   & \Sigma \text{ is a }\textbf{diagonal}\text{ matrix which contains the }\textbf{Singular Values.}
+   \end{align*}\]
+</p>
+
+<p>
+so:
+</p>
+
+<p>
+\[\begin{align*}
+   & U \text{ and } V \text{ are the }\textbf{eigenvectors of } C \text{ (ordered according to } \Sigma \textbf{) and } U=V \in \mathbb{R}^{n \times n}\text{.} \\
+   & \Sigma \text{ are the }\textbf{eigenvalues of } C \text{ (in decreasing order) and } \Sigma \in \mathbb{R}^{n \times n}\text{.} \\
+   & \\
+   & \Sigma = \begin{bmatrix}
+   \sigma_{11} & 0 & 0 & \cdots & 0 \\
+   0 & \sigma_{22} & 0 & \cdots & 0 \\
+   0 & 0 & \sigma_{22} & \cdots & 0 \\
+   \vdots & \vdots & \vdots & \ddots & \vdots \\
+   0 & 0 & 0 & \cdots &\sigma_{nn} \\
+   \end{bmatrix}
+   \end{align*}\]
+</p>
+
+<p>
+We project the data \(A\) on the <b>eigenvectors</b> of the subspace \(V\) reduced to \(n \times k\) dimensions.
+</p>
+
+<p>
+\[A_{reduced} = A V_{reduced}; A \in \mathbb{R}^{m \times n}, V_{reduced} \in \mathbb{R}^{n \times k}\]
+</p>
+</div>
+</div>
+<div id="outline-container-orgd3d8651" class="outline-3">
+<h3 id="orgd3d8651"><span class="section-number-3">9.2</span> Choosing the number of Principal Components</h3>
+<div class="outline-text-3" id="text-9-2">
+<p>
+To <b>choose \(k\)</b> (number of Principal Components), pick the smallest value of \(k\) for which:
+</p>
+
+<p>
+\[\frac{\sum_{i=1}^{k} \sigma_{ii}}{\sum_{i=1}^{m} \sigma_{ii}} \geq 0.99\] (99% of <b>variance retained</b>).
+</p>
+</div>
+</div>
+<div id="outline-container-orga9fb7a6" class="outline-3">
+<h3 id="orga9fb7a6"><span class="section-number-3">9.3</span> Reconstruction from compressed representation</h3>
+<div class="outline-text-3" id="text-9-3">
+<p>
+\[A_{reconstructed} = A_{reduced}V_{reduced}^{\top} = AV_{reduced}V_{reduced}^{\top}\]
+</p>
+</div>
+</div>
+<div id="outline-container-orgf02cbde" class="outline-3">
+<h3 id="orgf02cbde"><span class="section-number-3">9.4</span> Applications</h3>
+<div class="outline-text-3" id="text-9-4">
+<p>
+<b>Don't use PCA to prevent overfitting</b>, use <b>regularization instead</b>. This way it's less likely to throw away valuable information.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org94c3ec4" class="outline-2">
+<h2 id="org94c3ec4"><span class="section-number-2">10</span> Anomaly Detection</h2>
+<div class="outline-text-2" id="text-10">
+<p>
+Anomaly detection is the identification of rare observations which raise suspicions by <b>differing significantly from the majority of the data</b>.
+It is usually used for fraud detection, manufacturing defects or medical problems.
+</p>
+</div>
+<div id="outline-container-orgd1c1fe2" class="outline-3">
+<h3 id="orgd1c1fe2"><span class="section-number-3">10.1</span> How to use anomaly detection?</h3>
+<div class="outline-text-3" id="text-10-1">
+<ul class="org-ul">
+<li>We build a model that defines \(p(x)\) as the <b>probability</b> that \(x\) is a normal data point (not anomalous).</li>
+<li>We define a <b>probability threshold \(\mathcal{E}\)</b> depending on how sure we need to be.</li>
+<li>if \(p(x_{test}) \lt \mathcal{E} \rightarrow\) anomaly flag</li>
+<li>if \(p(x_{test}) \ge \mathcal{E} \rightarrow\) normal data</li>
+</ul>
+
+<p>
+\(\mathcal{E}\) is usually choosen between 0 and 0.05.
+</p>
+</div>
+</div>
+<div id="outline-container-org9e146fe" class="outline-3">
+<h3 id="org9e146fe"><span class="section-number-3">10.2</span> The Gaussian distribution (Normal Distribution)</h3>
+<div class="outline-text-3" id="text-10-2">
+<p>
+For \(x \in \mathbb{R}\), the <b><b>Gaussian equation</b></b> is:
+</p>
+
+<p>
+\[ p(x;\mu,\sigma^{2}) = \frac{1}{\sqrt{2\pi}\,\sigma}\:exp\Big({-\frac{(x-\mu)^{2}}{2\sigma^{2}}}\Big)\]
+</p>
+
+<p>
+where \(\mu\) is the mean, \(\sigma\) is the standard deviation and \(\sigma^{2}\) is the variance
+</p>
+</div>
+</div>
+<div id="outline-container-org357c12f" class="outline-3">
+<h3 id="org357c12f"><span class="section-number-3">10.3</span> Anomaly detection algorithm</h3>
+<div class="outline-text-3" id="text-10-3">
+<p>
+For a training set \(\{x^{(1)}, x^{(2)}, ..., x^{(m)}\}\), with each example \(x \in \mathbb{R}^n\) and <b>normally distributed</b> \(x_n \sim \mathcal{N}(\mu_n, \sigma_n^2)\)
+</p>
+
+<ol class="org-ol">
+<li>Choose features \(x_{i}\) that you think might be indicative of anomalous examples.</li>
+<li>Fit parameters \(\mu_{1}\), &#x2026;, \(\mu_{n}\), \(\sigma_{1}^{2}\), &#x2026;, \(\sigma_{n}^{2}\)</li>
+</ol>
+
+<p>
+\[
+   \begin{align*}
+   \mu_{j} &= \frac{1}{m} \sum_{i=1}^{m}x_j^{(i)}\\
+   \sigma_{j}^{2} &= \frac{1}{m} \sum_{i=1}^{m}\big(x_{j}^{(i)} - \mu_{j}\big)^{2}
+   \end{align*}\]
+</p>
+
+<ol class="org-ol">
+<li>Given new example \(x\), compute \(p(x)\):</li>
+</ol>
+
+<p>
+\[ p(x)=
+   \prod_{j=1}^{n}p(x_{j};\mu_{j},\sigma_{j}^{2})=
+   \prod_{j=1}^{n}\underbrace{\frac{1}{\sqrt{2\pi}\,\sigma_{j}}\:exp\Big({-\frac{(x_{j}-\mu_{j})^{2}}{2\sigma_{j}^{2}}}\Big)}_\textbf{gaussian equation}\]
+</p>
+
+<p>
+Anomaly if \(p(x) \lt \mathcal{E}\)
+</p>
+</div>
+</div>
+<div id="outline-container-orgc44bb59" class="outline-3">
+<h3 id="orgc44bb59"><span class="section-number-3">10.4</span> Algorithm evaluation</h3>
+<div class="outline-text-3" id="text-10-4">
+<ol class="org-ol">
+<li>Set \(\mathcal{E}\) at some value.</li>
+<li>Fit model \(p(x)\) on training set \(\{x^{(1)}, x^{(2)}, ..., x^{(m)}\}\).</li>
+<li>On a cross validation/test set predict \(x\):</li>
+</ol>
+
+<p>
+\[
+   y = \begin{cases}
+   1 & \text{if p(x)} \lt \mathcal{E} \text{ (anomaly)} \\
+   0 & \text{if p(x)} \ge \mathcal{E} \text{ (normal)} \end{cases}\]
+</p>
+
+<p>
+Possible evaluation metrics to use:
+</p>
+<ul class="org-ul">
+<li>True positive, false positive, true negative, false negative</li>
+<li>Precision/Recall (\(F_{1}\text{-score}\)):</li>
+</ul>
+
+<p>
+\[ F_{1} = \frac{2 \times \text{precision} \times \text{recall}}{\text{precision} + \text{recall}}\]
+</p>
+
+<p>
+Can also use cross-validation set to choose \(\mathcal{E}\)
+</p>
+</div>
+</div>
+<div id="outline-container-org50d017e" class="outline-3">
+<h3 id="org50d017e"><span class="section-number-3">10.5</span> Anomaly detection vs. Supervised learning</h3>
+<div class="outline-text-3" id="text-10-5">
+</div>
+<div id="outline-container-org410183f" class="outline-4">
+<h4 id="org410183f"><span class="section-number-4">10.5.1</span> Anomaly detection</h4>
+<div class="outline-text-4" id="text-10-5-1">
+<ul class="org-ul">
+<li><b>Very small number of positive example</b> (\(y = 1\)) (0-20 is common).</li>
+<li>Large number of negative examples (\(y = 0\)).</li>
+<li>Many different "types" of anomalies. Hard for an algorithm to learn from positive examples what the anomalies look like; future anomalies may look nothing like any of the anomalous examples we've seen before.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org181a789" class="outline-4">
+<h4 id="org181a789"><span class="section-number-4">10.5.2</span> Supervised learning</h4>
+<div class="outline-text-4" id="text-10-5-2">
+<ul class="org-ul">
+<li><b>Large number of positive and negative examples</b>.</li>
+<li>Enough positive examples for algorithm to get a sense of what positive examples are like, future positive examples are likely to be similar to ones in training set.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org895e758" class="outline-3">
+<h3 id="org895e758"><span class="section-number-3">10.6</span> Choosing Features to use</h3>
+<div class="outline-text-3" id="text-10-6">
+<p>
+Plot a <b>histogram</b> of data to check it has a Gaussian description.
+</p>
+
+<p>
+If feature is <b>Non-Gaussian</b>, we can play with different <b>transformations</b> of the data to make it look more Gaussian:
+</p>
+
+<ul class="org-ul">
+<li><b>Log transformation</b>:
+\(x \rightarrow log(x + c)\)</li>
+<li><b>Exponent transformation</b>:
+\(x \rightarrow x^{\frac{1}{2}}, x^{\frac{1}{3}}, \dots\)</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org9cb92fa" class="outline-3">
+<h3 id="org9cb92fa"><span class="section-number-3">10.7</span> Multivariate gaussian distribution model</h3>
+<div class="outline-text-3" id="text-10-7">
+<p>
+\(x \in \mathbb{R}^n\). Don't model $p(x<sub>(1)</sub>), p(x<sub>(2)</sub>), &#x2026;,$ etc separately. Model \(p(x)\) all in one go. 
+</p>
+
+<p>
+Parameters:
+\(\mu \in \mathbb{R}^n\), $ &Sigma; &isin; \mathbb{R}<sup>n &times; n</sup>$ (<b>covariance matrix</b>).
+</p>
+
+<p>
+The <b>Normal Gaussian</b> model is a <b>special case</b> of Multivariate Gaussian distribution where:
+</p>
+
+<p>
+\[ \mathbf{\Sigma} = \begin{bmatrix}
+   \sigma_{1}^{2} & 0 & \cdots & 0 \\
+   0 & \sigma_{2}^{2} & \cdots & 0 \\
+   \vdots & \vdots & \ddots & \vdots \\
+   0 & 0 & \cdots & \sigma_{n}^{2}
+   \end{bmatrix}\]
+</p>
+
+<p>
+Algorithm:
+</p>
+
+<ol class="org-ol">
+<li>Fit model \(p(x)\) by setting:</li>
+</ol>
+
+<p>
+\[
+   \begin{align}
+   \mu &= \frac{1}{m} \sum_{i=1}^{m}x^{(i)}\\
+   \Sigma &= \frac{1}{m} \sum_{i=1}^{m} (x^{(i)} - \mu) (x^{(i)} - \mu)^{\top}
+   \end{align}\]
+</p>
+
+<ol class="org-ol">
+<li>Given a new example \(x\), compute:</li>
+</ol>
+
+<p>
+\[ p(x ; \mu, \Sigma) = 
+   \frac{1}{(2\pi) ^{\frac{n}{2}}\ \lvert \Sigma \rvert ^{\frac{1}{2}}} \: exp\left(-\frac{1}{2} (x-\mu)^{\top} \:\Sigma^{-1} \:(x-\mu)\right)\]
+</p>
+
+<p>
+with \(\lvert \Sigma \rvert\) determinant of the <b>Covariance Matrix</b>
+</p>
+
+<p>
+Flag an anomaly if \(p(x) \lt \mathcal{E}\) 
+</p>
+</div>
+</div>
+<div id="outline-container-org2efd883" class="outline-3">
+<h3 id="org2efd883"><span class="section-number-3">10.8</span> Original model vs. Multivariate model</h3>
+<div class="outline-text-3" id="text-10-8">
+</div>
+<div id="outline-container-org247ccd2" class="outline-4">
+<h4 id="org247ccd2"><span class="section-number-4">10.8.1</span> Original model</h4>
+<div class="outline-text-4" id="text-10-8-1">
+<p>
+\[p(x_{1};\mu_{1},\sigma_{1}^{2}) \times \cdots \times p(x_{n};\mu_{n},\sigma_{n}^{2})\]
+</p>
+
+<ul class="org-ul">
+<li>Manually create features to capture anomalies where \(x_1, x_2\) take unusual combinations of values</li>
+<li><b>Computationally cheaper</b> (alternatively, scales better to large \(n\))</li>
+<li>OK even if \(m\) (training set size) is small</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgfc5ffbe" class="outline-4">
+<h4 id="orgfc5ffbe"><span class="section-number-4">10.8.2</span> Multivariate Gaussian</h4>
+<div class="outline-text-4" id="text-10-8-2">
+<p>
+\[p(x ; \mu, \Sigma) = \frac{1}{(2\pi) ^{\frac{n}{2}}\ \lvert \Sigma \rvert ^{\frac{1}{2}}} \: exp\Big(-\frac{1}{2} (x-\mu)^{\top} \:\Sigma^{-1} \:(x-\mu)\Big)\]
+</p>
+
+<ul class="org-ul">
+<li>Automatically captures correlations between features</li>
+<li><b>Computationally more expensive</b></li>
+<li><b>Must have \(m \gt n\),</b> or else \(\Sigma\) is <b>non-invertible</b></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd3fd86f" class="outline-2">
+<h2 id="orgd3fd86f"><span class="section-number-2">11</span> Explanations</h2>
+<div class="outline-text-2" id="text-11">
+</div>
+<div id="outline-container-orgbce3854" class="outline-3">
+<h3 id="orgbce3854"><span class="section-number-3">11.1</span> Chain Rule</h3>
+<div class="outline-text-3" id="text-11-1">
+<p>
+\[\frac{\partial\: f(g(x))}{\partial\: x} = \frac{\partial\: f(g(x))}{\partial\: g(x)} \cdot \frac{\partial\: g(x)}{\partial \: x}\]
+</p>
+</div>
+</div>
+<div id="outline-container-org71533ef" class="outline-3">
+<h3 id="org71533ef"><span class="section-number-3">11.2</span> Logarithmic Derivative</h3>
+<div class="outline-text-3" id="text-11-2">
+<p>
+\[\frac{\partial\: \log(x)}{\partial\: x} = \frac{1}{x}\]
+</p>
+</div>
+</div>
+<div id="outline-container-org549e408" class="outline-3">
+<h3 id="org549e408"><span class="section-number-3">11.3</span> Exponential Derivative</h3>
+<div class="outline-text-3" id="text-11-3">
+<p>
+\[\frac{\partial\: e^{x}}{\partial\: x} = e^{x}\]
+</p>
+</div>
+</div>
+<div id="outline-container-org36a5bbb" class="outline-3">
+<h3 id="org36a5bbb"><span class="section-number-3">11.4</span> Sigmoid Derivative</h3>
+<div class="outline-text-3" id="text-11-4">
+<p>
+\[ \begin{align*}
+   \sigma(x) & = \frac{1}{1 + e^{-x}} = (1 + e^{-x})^{-1} \\
+   \frac{\partial\: \sigma(x)}{\partial\: x} & = -(1 + e^{-x})^{-2}(-e^{-x}) = \frac{e^{-x}}{(1 + e^{-x})^2} \\
+   \frac{\partial\: \sigma(x)}{\partial\: x} & = \frac{(1 + e^{-x}) - 1}{(1 + e^{-x})^2} = \frac{1}{1 + e^{-x}} - \frac{1}{(1 + e^{-x})^2} = \frac{1}{1 + e^{-x}}(1 - \frac{1}{1 + e^{-x}}) \\
+   \frac{\partial\: \sigma(x)}{\partial\: x} & = \sigma(x)(1 - \sigma(x))
+   \end{align*} \]
+</p>
+</div>
+</div>
+<div id="outline-container-org32e4149" class="outline-3">
+<h3 id="org32e4149"><span class="section-number-3">11.5</span> Logistic Hypothesis Derivative</h3>
+<div class="outline-text-3" id="text-11-5">
+<p>
+\[ \begin{align*}
+   h_\theta(x) & = \frac{1}{1 + e^{-\theta^\top x}} \\
+   \frac{\partial\: h_\theta(x)}{\partial\: \theta_j} & = h_\theta(x)(1 - h_\theta(x))x_j
+   \end{align*} \]
+</p>
+</div>
+</div>
+<div id="outline-container-org475ad95" class="outline-3">
+<h3 id="org475ad95"><span class="section-number-3">11.6</span> Logistic Cost Function Derivative</h3>
+<div class="outline-text-3" id="text-11-6">
+<p>
+\[ \begin{align*}
+   J(\theta) & = -\frac{1}{m}\bigg[\sum_{i=1}^{m}y^{(i)} log(h_{\theta}(\mathbf{x}^{(i)})) + (1 - y^{(i)}) log(1 - h_{\theta}(\mathbf{x}^{(i)}))\bigg]\\
+   \frac{\partial\: y\log(h_\theta(x))}{\partial\: \theta_j} & = \frac{y}{h_\theta(x)}  h_\theta(x)(1 - h_\theta(x))x_j \\
+   & = yx_j(1 - h_\theta(x)) \\
+   & = yx_j - yx_jh_\theta(x) \\
+   \frac{\partial\: (1 - y)\log(1 - h_\theta(x))}{\partial\: \theta_j} & = \frac{1 - y}{1 - h_\theta(x)}h_\theta(x)(h_\theta(x) - 1)x_j \\
+   & = (y - 1)h_\theta(x)x_j \\
+   & = yx_jh_\theta(x) - x_jh_\theta(x) \\
+   \frac{\partial\: J(\theta)}{\partial\: \theta_j} & = -\frac{1}{m}\sum_{i=1}^{m}\bigg[y^{(i)}x^{(i)}_j - y^{(i)}x^{(i)}_jh_\theta(x^{(i)}) + y^{(i)}x^{(i)}_jh_\theta(x^{(i)}) - x^{(i)}_jh_\theta(x^{(i)})\bigg] \\
+   & = -\frac{1}{m}\sum_{i=1}^{m}\bigg[y^{(i)}x^{(i)}_j - x^{(i)}_jh_\theta(x^{(i)})\bigg] \\
+   \frac{\partial\: J(\theta)}{\partial\: \theta_j} & = \frac{1}{m}\sum_{i=1}^{m}\bigg[(h_\theta(x^{(i)}) - y^{(i)})x^{(i)}_j\bigg]
+   \end{align*} \]
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Guillaume Giraud</p>
+<p class="date">Created: 2018-10-27 Sat 20:32</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

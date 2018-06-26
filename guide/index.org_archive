@@ -1,0 +1,48 @@
+#    -*- mode: org -*-
+
+
+Archived entries from file /Users/guillaume/Documents/Programmation/jupyter/python/Coursera Machine Learning/guide/index.org
+
+
+* Normal Equations
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-06-28 Thu 17:34
+  :ARCHIVE_FILE: ~/Documents/Programmation/jupyter/python/Coursera Machine Learning/guide/index.org
+  :ARCHIVE_OLPATH: Linear Regression
+  :ARCHIVE_CATEGORY: index
+  :END:
+  #+BEGIN_CENTER
+  $\theta = (\mathbf{X}^{\top}\mathbf{X})^{-1}\mathbf{X}^{\top}\mathbf{y}, \mathbf{X} \in \mathbb{R}^{m \times n+1}$
+  #+END_CENTER
+  $m$ is the number of training examples, $n$ is the number of features.
+  #+BEGIN_CENTER
+  $$ \begin{align*}
+  \mathbf{X} = \begin{bmatrix}
+  1 & \mathbf{x}_{1}^{(1)} & \mathbf{x}_{2}^{(1)} & \cdots & \mathbf{x}_{n}^{(1)} \\
+  1 & \mathbf{x}_{1}^{(2)} & \mathbf{x}_{2}^{(2)} & \cdots & \mathbf{x}_{n}^{(2)} \\
+  \vdots & \vdots & \vdots & \ddots & \vdots \\
+  1 & \mathbf{x}_{1}^{(m)} & \mathbf{x}_{2}^{(m)} & \cdots & \mathbf{x}_{n}^{(m)}
+  \end{bmatrix} \in \mathbb{R}^{m \times n+1} \\
+
+  & \mathbf{y} = \begin{bmatrix}
+  y^{(1)} \\
+  y^{(2)} \\
+  \vdots \\
+  y^{(m)}
+  \end{bmatrix} \in \mathbb{R}^{m} \qquad \theta = \begin{bmatrix}
+  \theta_{0} \\
+  \theta_{1} \\
+  \theta_{2} \\
+  \vdots \\
+  \theta_{n}
+  \end{bmatrix} \in \mathbb{R}^{n+1
+  \end{align} $$
+  #+END_CENTER
+  No need to use feature scaling.
+
+  Use *gradient descent* over *normal equation* when we have more than 1000~10000 features.
+
+  If $\mathbf{X}^{\top}\mathbf{X}$ is non-invertible:
+
+  - remove redundant features (linearly dependent).
+  - delete features or use regularization if too many features ($m\leqslant n$).
