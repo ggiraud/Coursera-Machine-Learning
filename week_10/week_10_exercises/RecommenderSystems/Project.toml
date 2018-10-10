@@ -1,0 +1,13 @@
+name = "RecommenderSystems"
+uuid = "06066f28-f009-11e8-2835-218de09f10ff"
+authors = ["Guillaume Giraud <ggiraud1984@gmail.com>"]
+version = "0.1.0"
+
+[deps]
+Distributed = "8ba89e20-285c-5b6f-9357-94700520ee1b"
+Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
+JuliaDB = "a93385a2-3734-596a-9a66-3cfbb77141e6"
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
+SharedArrays = "1a1011a3-84de-559e-8e89-a11a2f7dc383"
+SparseArrays = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
